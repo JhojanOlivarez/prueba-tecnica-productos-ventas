@@ -1,73 +1,145 @@
-# React + TypeScript + Vite
+## Frontend – Productos & Ventas App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web construida con React + TypeScript + Vite, totalmente integrada con el backend en .NET, diseñada para administrar categorías, productos y ventas, con autenticación JWT, dashboard con métricas y CRUDs completos.
 
-Currently, two official plugins are available:
+Tecnologías principales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+React 18 + TypeScript
 
-## React Compiler
+Vite
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Axios
 
-## Expanding the ESLint configuration
+React Router v6
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Context API
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+CSS modular
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+LocalStorage
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Estructura del proyecto
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+frontend/
+│── public/
+│── src/
+│   ├── api/
+│   │   └── client.ts
+│   ├── assets/
+│   ├── components/
+│   ├── context/
+│   │   └── AuthContext.tsx
+│   ├── pages/
+│   │   ├── LoginPage.tsx
+│   │   ├── DashboardPage.tsx
+│   │   ├── categories/
+│   │   │   ├── CategoriesListPage.tsx
+│   │   │   └── CategoryFormPage.tsx
+│   │   ├── sales/
+│   │   │   ├── SalesListPage.tsx
+│   │   │   └── CreateSalePage.tsx
+│   ├── types/
+│   │   └── index.ts
+│   ├── App.tsx
+│   ├── main.tsx
+│── .env
+│── package.json
+│── tsconfig.json
+│── vite.config.ts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Instalación
+1. Clonar el repositorio
+git clone https://github.com/tu-repo.git
+cd frontend
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+2. Instalar dependencias
+npm install
+
+3. Crear archivo .env
+VITE_API_URL=http://localhost:5014
+
+4. Ejecutar modo desarrollo
+npm run dev
+
+5. Build producción
+npm run build
+
+6. Previsualizar build
+npm run preview
+
+Autenticación (JWT)
+
+El token JWT se guarda en localStorage y se agrega automáticamente a cada petición gracias al interceptor:
+
+config.headers.Authorization = `Bearer ${token}`;
+
+Integración con Backend
+Auth
+
+POST /api/auth/login
+
+POST /api/auth/register
+
+Categories
+
+GET /api/categories
+
+POST /api/categories
+
+PUT /api/categories/{id}
+
+DELETE /api/categories/{id}
+
+Products
+
+GET /api/products
+
+POST /api/products
+
+Sales
+
+GET /api/sales
+
+POST /api/sales
+
+GET /api/sales/report
+
+Características principales
+
+## Autenticación completa
+
+Login
+
+Logout
+
+Persistencia de sesión
+
+## Dashboard profesional
+
+Total de ventas
+
+Total productos
+
+Total categorías
+
+Gráfica de ventas por fecha
+
+Últimas ventas
+
+## CRUD de categorías
+
+Crear / editar / eliminar / listar
+
+## Gestión de productos
+
+Creación rápida
+
+## Listado dinámico
+
+ Gestión de ventas
+
+Registro con múltiples ítems
+
+Cálculo automático
+
+Historial completo

@@ -12,6 +12,9 @@ const Sidebar: React.FC = () => {
         <NavLink to="/categories" className="sidebar__link">
           Categorías
         </NavLink>
+        <NavLink to="/products" className="sidebar__link">
+          Productos
+        </NavLink>
         <NavLink to="/sales/new" className="sidebar__link">
           Nueva venta
         </NavLink>

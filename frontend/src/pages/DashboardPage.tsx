@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import api from "../api/client";
 import type { SaleResponse, Category } from "../types";
+import styles from "./DashboardPage.module.css";
 
 const DashboardPage: React.FC = () => {
   const [sales, setSales] = useState<SaleResponse[]>([]);
@@ -30,7 +31,7 @@ const DashboardPage: React.FC = () => {
       }
     };
 
-    loadData();
+    void loadData();
   }, []);
 
   // ====== MÉTRICAS DERIVADAS ======
@@ -63,84 +64,98 @@ const DashboardPage: React.FC = () => {
   );
 
   return (
-    <div className="page page--dashboard">
-      <header className="page__header">
+    <div className={`page ${styles.pageDashboard}`}>
+      <header className={styles.pageHeader}>
         <div>
-          <h1 className="page__title">Panel general</h1>
-          <p className="page__subtitle">
+          <h1 className={styles.pageTitle}>Panel general</h1>
+          <p className={styles.pageSubtitle}>
             Resumen en tiempo real de tus ventas, categorías y productos.
           </p>
         </div>
-        <div className="page__header-right">
-          <span className="badge badge--success">Online</span>
+        <div className={styles.pageHeaderRight}>
+          <span className={`${styles.badge} ${styles.badgeSuccess}`}>
+            Online
+          </span>
         </div>
       </header>
 
-      {loading && <div className="page__loader">Cargando datos...</div>}
-      {error && <div className="page__error">{error}</div>}
+      {loading && (
+        <div className={styles.pageLoader}>Cargando datos...</div>
+      )}
+      {error && <div className={styles.pageError}>{error}</div>}
 
       {!loading && !error && (
         <>
           {/* Tarjetas KPI */}
-          <section className="dashboard__kpi-grid">
-            <article className="kpi-card kpi-card--primary">
+          <section className={styles.kpiGrid}>
+            <article
+              className={`${styles.kpiCard} ${styles.kpiCardPrimary}`}
+            >
               <h3>Total ventas</h3>
-              <p className="kpi-card__value">
+              <p className={styles.kpiCardValue}>
                 {totalSalesCount.toLocaleString("es-CO")}
               </p>
-              <span className="kpi-card__label">Ventas registradas</span>
+              <span className={styles.kpiCardLabel}>
+                Ventas registradas
+              </span>
             </article>
 
-            <article className="kpi-card kpi-card--secondary">
+            <article
+              className={`${styles.kpiCard} ${styles.kpiCardSecondary}`}
+            >
               <h3>Ingresos</h3>
-              <p className="kpi-card__value">
+              <p className={styles.kpiCardValue}>
                 $
                 {totalRevenue.toLocaleString("es-CO", {
                   minimumFractionDigits: 0,
                 })}
               </p>
-              <span className="kpi-card__label">COP acumulados</span>
+              <span className={styles.kpiCardLabel}>COP acumulados</span>
             </article>
 
-            <article className="kpi-card kpi-card--accent">
+            <article
+              className={`${styles.kpiCard} ${styles.kpiCardAccent}`}
+            >
               <h3>Ítems vendidos</h3>
-              <p className="kpi-card__value">
+              <p className={styles.kpiCardValue}>
                 {totalItemsSold.toLocaleString("es-CO")}
               </p>
-              <span className="kpi-card__label">Unidades totales</span>
+              <span className={styles.kpiCardLabel}>
+                Unidades totales
+              </span>
             </article>
 
-            <article className="kpi-card">
+            <article className={styles.kpiCard}>
               <h3>Categorías activas</h3>
-              <p className="kpi-card__value">{categories.length}</p>
-              <span className="kpi-card__label">Categorías</span>
+              <p className={styles.kpiCardValue}>{categories.length}</p>
+              <span className={styles.kpiCardLabel}>Categorías</span>
             </article>
           </section>
 
           {/* Grid inferior: últimas ventas + resumen categorías */}
-          <section className="dashboard__bottom-grid">
-            <article className="panel panel--table">
-              <div className="panel__header">
+          <section className={styles.bottomGrid}>
+            <article className={styles.panel}>
+              <div className={styles.panelHeader}>
                 <h2>Últimas ventas</h2>
-                <span className="panel__subtitle">
+                <span className={styles.panelSubtitle}>
                   {lastSales.length} más recientes
                 </span>
               </div>
 
               {lastSales.length === 0 ? (
-                <p className="panel__empty">
-                  Aún no hay ventas registradas. Crea una desde el módulo de
-                  Ventas.
+                <p className={styles.panelEmpty}>
+                  Aún no hay ventas registradas. Crea una desde el módulo
+                  de Ventas.
                 </p>
               ) : (
                 <div className="table-wrapper">
-                  <table className="data-table">
+                  <table className={styles.dataTable}>
                     <thead>
                       <tr>
                         <th>Fecha</th>
                         <th>Cliente</th>
-                        <th className="data-table__th--right">Total</th>
-                        <th className="data-table__th--center">Ítems</th>
+                        <th className={styles.dataTableThRight}>Total</th>
+                        <th className={styles.dataTableThCenter}>Ítems</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -153,13 +168,13 @@ const DashboardPage: React.FC = () => {
                             })}
                           </td>
                           <td>{sale.customerName || "Consumidor final"}</td>
-                          <td className="data-table__td--right">
+                          <td className={styles.dataTableTdRight}>
                             $
                             {sale.total.toLocaleString("es-CO", {
                               minimumFractionDigits: 0,
                             })}
                           </td>
-                          <td className="data-table__td--center">
+                          <td className={styles.dataTableTdCenter}>
                             {sale.items.reduce(
                               (sum, item) => sum + item.quantity,
                               0
@@ -173,24 +188,24 @@ const DashboardPage: React.FC = () => {
               )}
             </article>
 
-            <article className="panel">
-              <div className="panel__header">
+            <article className={styles.panel}>
+              <div className={styles.panelHeader}>
                 <h2>Resumen de categorías</h2>
-                <span className="panel__subtitle">
+                <span className={styles.panelSubtitle}>
                   Vista rápida de tu catálogo
                 </span>
               </div>
 
               {categories.length === 0 ? (
-                <p className="panel__empty">
+                <p className={styles.panelEmpty}>
                   Aún no hay categorías. Crea algunas desde el módulo de
                   Categorías.
                 </p>
               ) : (
-                <ul className="tag-list">
+                <ul className={styles.tagList}>
                   {categories.map((cat) => (
-                    <li key={cat.id} className="tag-list__item">
-                      <span className="tag-list__name">{cat.name}</span>
+                    <li key={cat.id} className={styles.tagListItem}>
+                      {cat.name}
                     </li>
                   ))}
                 </ul>

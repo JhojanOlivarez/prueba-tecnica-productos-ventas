@@ -7,6 +7,7 @@ import DashboardPage from "./pages/DashboardPage";
 import CategoriesPage from "./pages/categories/CategoriesPage";
 import SalesCreatePage from "./pages/sales/SalesCreatePage";
 import SalesListPage from "./pages/sales/SalesListPage";
+import ProductsPage from "./pages/products/ProductsPage";
 
 const App: React.FC = () => {
   return (
@@ -34,6 +35,19 @@ const App: React.FC = () => {
             </Layout>
           </ProtectedRoute>
         )}
+      />
+
+      
+   
+      <Route
+        path="/products"
+        element={
+          <ProtectedRoute>
+            <Layout>
+              <ProductsPage />
+            </Layout>
+          </ProtectedRoute>
+        }
       />
 
       <Route

@@ -1,0 +1,39 @@
+
+
+/* Grupo de campos del formulario */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.9rem;
+}
+
+/* Fila (precio + stock) */
+.formGroupRow {
+  display: flex;
+  gap: 1rem;
+}
+
+.formGroupRow > div {
+  flex: 1;
+}
+
+/* Acciones del formulario (botones) */
+.formActions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* Acciones de la tabla (botones Editar/Eliminar) */
+.tableActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Responsive: en pantallas pequeñas */
+@media (max-width: 640px) {
+  .formGroupRow {
+    flex-direction: column;
+  }
+}
